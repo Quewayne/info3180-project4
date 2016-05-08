@@ -1,0 +1,28 @@
+angular.module('myApp.logout', ['ngRoute','satellizer'])
+
+.config(['$routeProvider', function($routeProvider) {
+  $routeProvider.when('/api/user/logout', {
+    templateUrl: 'static/templates/out.html',
+    controller: 'outCtrl',
+     resolve: {
+          loginRequired: loginRequired
+        }
+  });
+  
+  function loginRequired($q, $location, $auth) {
+      var deferred = $q.defer();
+      if ($auth.isAuthenticated()) {
+        deferred.resolve();
+      } else {
+        $location.path('/login');
+      }
+      return deferred.promise;
+    }
+}])
+
+.controller('outCtrl', ['$scope', '$log', '$http', '$location', '$rootScope',function($scope, $log, $http, $location,$rootScope) {
+
+      		localStorage.removeItem("satellizer_token");
+      		$location.path('/');
+
+}]);

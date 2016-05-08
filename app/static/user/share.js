@@ -1,0 +1,94 @@
+angular.module('myApp.share', ['ngRoute','ngSanitize','satellizer'])
+
+.config(['$routeProvider', function($routeProvider) {
+  $routeProvider.when('/api/user/:id/share', {
+    templateUrl: 'static/templates/share.html',
+    controller: 'shareCtrl',
+    resolve: {
+          loginRequired: loginRequired
+        }
+  });
+  
+  function loginRequired($q, $location, $auth) {
+      var deferred = $q.defer();
+      if ($auth.isAuthenticated()) {
+        deferred.resolve();
+      } else {
+        $location.path('/login');
+      }
+      return deferred.promise;
+    }
+    
+}])
+
+.controller('shareCtrl', ['$scope', '$log', '$http', '$sce', '$location', '$rootScope',function($scope, $log, $http, $sce, $location, $rootScope) {
+//$scope.k='Click desired Image';
+$scope.toggleVar = true;
+if ($rootScope.user == null){
+	$location.path('/api/user/login');
+}
+    var email1="test@test.com";
+    var email2="test@test.com";
+    var email3="test@test.com";
+    var email4="test@test.com";
+//$scope.formshw="false";
+$scope.shareList = function() {
+
+    $log.log("test");
+
+    // get the URL from the input
+    //var userInput = $scope.url;
+    var url= $scope.url;
+    if ($scope.email1 == null ){
+    	email1="test@test.com";
+    }
+    else{
+    	email1=$scope.email1;
+    }
+    if ($scope.email2 == null ){
+    	email2="test@test.com";
+    }
+    else{
+    	email2=$scope.email2;
+    }
+    if ($scope.email3 == null ){
+    	email3="test@test.com";
+    }
+    else{
+    	email3=$scope.email3;
+    }
+    if ($scope.email4 == null ){
+    	email4="test@test.com";
+    }
+    else{
+    	email4=$scope.email4;
+    }
+    
+    var usr= $rootScope.user;
+    $log.log(email3);
+    $log.log(email3);
+    $log.log(email3);
+    
+    // fire the API request
+    $http.post('/api/user/' + usr + '/share', {"email1": email1, "email2": email2 , "email3": email3, "email4": email4}).
+      success(function(results) {
+      	$location.path('/api/user/:id/wishlist');
+        $log.log(results);
+      }).
+      error(function(error) {
+        $log.log(error);
+      });
+
+  };
+  $scope.change= function($index){
+  	$scope.k='Image URL: ' + $scope.n[$index];
+  	$scope.thumb= $scope.n[$index];
+  	$scope.toggleVar = false;
+  	//$scope.formshw="true";
+  };
+  
+  
+  
+  
+  
+}]);

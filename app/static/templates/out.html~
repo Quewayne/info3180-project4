@@ -1,0 +1,19 @@
+<div class="container">
+   	<h1>Share</h1>
+	<form role="form" ng-submit="shareList()" method="post" class="form-signin">
+	<div class="form-group">
+   		<h2 class="form-signin-heading">Please enter email addresses</h2>
+   		<label for="inputEmail" class="sr-only">Email address</label>
+   		<input type="email" ng-model="email1" name="email1" id="inputEmail" class="form-control" placeholder="test@test.com" autofocus="">
+   		<label for="inputEmail" class="sr-only">Email address</label>
+   		<input type="email" ng-model="email2" name="email2" id="inputEmail2" class="form-control" placeholder="test@test.com">
+   		<label for="inputEmail" class="sr-only">Email address</label>
+   		<input type="email" ng-model="email3" name="email3" id="inputEmail3" class="form-control" placeholder="test@test.com">
+   		<label for="inputEmail" class="sr-only">Email address</label>
+   		<input type="email" ng-model="email4" name="email4" id="inputEmail4" class="form-control" placeholder="test@test.com">
+   		</div>
+   		<button class="btn btn-lg btn-primary btn-block" type="submit">Send</button>
+	</form>
+	<p ng-hide="toggleVar">{{msg}}</p>
+</div>
+
