@@ -174,7 +174,8 @@ def shwList(usrID):
 		user= usrID
 		url= data["url"]
 		thumbnail= data["thumbnail"]
-		wish= Wish(title,description,thumbnail,user,url)
+		priority=data["priority"]
+		wish= Wish(title,description,thumbnail,user,url,priority)
 		db.session.add(wish)
 		db.session.commit()
 		wishes = db.session.query(Wish).filter_by(user=usrID).all()
@@ -189,7 +190,7 @@ def shwList(usrID):
 		wishes = db.session.query(Wish).filter_by(user=usrID).all()
 	 	wishlist = []
         	for wish in wishes:
-            		wishlist.append({'title': wish.title,'description':wish.description,'url':wish.url,'thumbnail':wish.thumbnail})
+            		wishlist.append({'title': wish.title,'description':wish.description,'url':wish.url,'thumbnail':wish.thumbnail,'priority':wish.priority,'status':wish.status})
         	if(len(wishlist)>0):
             		return jsonify({"error":"null","data":{"wishes":wishlist},"message":"Success"})
         	else:
@@ -213,6 +214,26 @@ def removeItem(usrID):
 		#thumbnail= wish.thumbnail
 		#wishdel= Wish(title,description,thumbnail,user,url)
 		db.session.delete(wish)
+        	db.session.commit()
+        	return jsonify({"error":"null","message":"Success"})
+        	
+@app.route('/api/user/<usrID>/purchased', methods=['POST'])
+@cross_origin(headers=['Content-Type', 'Authorization'])
+@requires_auth
+def updateItem(usrID):	
+	data= json.loads(request.data.decode())
+	update= data["urlup"]
+        wish = db.session.query(Wish).filter_by(thumbnail=update).first()
+	if wish is None:
+		return jsonify({"error":"1","message":"No such wish exists"})
+	else:
+		#title= wish.title
+		#description= wish.description
+		#user= usrID
+		#url= wish.url
+		#thumbnail= wish.thumbnail
+		#wishdel= Wish(title,description,thumbnail,user,url)
+		wish.status="Purchased"
         	db.session.commit()
         	return jsonify({"error":"null","message":"Success"})
 

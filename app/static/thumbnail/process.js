@@ -67,7 +67,8 @@ $scope.getImages = function() {
   var usr= $rootScope.user;
   var thumbnail=$scope.thumb;
   var u= $scope.url;
-  $http.post('/api/user/' + usr + '/wishlist', {"title": title, "description": descrip , "user": usr, "thumbnail": thumbnail, "url": u}).
+  var p= $scope.singleSelect;
+  $http.post('/api/user/' + usr + '/wishlist', {"title": title, "description": descrip , "user": usr, "thumbnail": thumbnail, "url": u, "priority":p}).
       success(function(results) {
       	$location.path('/api/user/:id/wishlist');
         $log.log(results);

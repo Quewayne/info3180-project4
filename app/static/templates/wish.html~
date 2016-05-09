@@ -11,7 +11,7 @@
 	</form>
 	<h2 > {{k}}</h2>
 	
-	<form ng-hide="toggleVar" role="form" ng-submit="getdetails()" method="post" class="form-details">
+	<form ng-hide="toggleVar" role="form" ng-submit="getDetails()" method="post" class="form-details">
 	<div class="form-group">
    		<h2 class="form-signin-heading">Enter Details</h2>
    		<label for="inputTitle" class="sr-only">Title</label>
@@ -19,9 +19,14 @@
    		
    		<label for="inputDescrip" class="sr-only">Title</label>
    		<input type="text" ng-model="description" name="description" id="inputDescrip" class="form-control" placeholder="Img Description" required="">
-   		
+   		<label for="singleSelect"> Priority: </label><br>
+    <select name="singleSelect" ng-model="singleSelect">
+      <option value="option-1">High</option>
+      <option value="option-2">Normal</option>
+      <option value="option-3">Low</option>
+    </select><br>
    		</div>
-   		<button class="btn btn-lg btn-primary btn-block" type="submit">Get Images</button>
+   		<button class="btn btn-lg btn-primary btn-block" type="submit">Save Wish</button>
 	</form>
 	
 	<div class="col-md-4" ng-repeat="x in n track by $index">

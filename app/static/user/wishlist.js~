@@ -73,7 +73,20 @@ $scope.remove= function($index){
       error(function(error) {
         $log.log(error);
       });
-	$location.path('/api/user/:id/share');
+	
+};
+
+$scope.purchased= function($index){
+	var urlup=$scope.wishes[$index]["thumbnail"];
+	$http.post('/api/user/' + usr + '/remove', {"urlup": urlup}).
+      	success(function(results) {
+      		$location.path('/api/user/:id/wishlist');
+        	$log.log(results);
+      }).
+      error(function(error) {
+        $log.log(error);
+      });
+	
 };
   
 

@@ -75,6 +75,19 @@ $scope.remove= function($index){
       });
 	
 };
+
+$scope.purchased= function($index){
+	var urlup=$scope.wishes[$index]["thumbnail"];
+	$http.post('/api/user/' + usr + '/purchased', {"urlup": urlup}).
+      	success(function(results) {
+      		$location.path('/api/user/:id/wishlist');
+        	$log.log(results);
+      }).
+      error(function(error) {
+        $log.log(error);
+      });
+	
+};
   
 
 }]);

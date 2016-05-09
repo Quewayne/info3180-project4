@@ -1,6 +1,7 @@
 <div class="container" >
    	<div class="panel panel-default">
-    <div class="panel-heading">Your WishList</div>
+    <div class="panel-heading">Your WishList (Note: deletion will be reflected after you sign in again)</div>
+    
     <button class="btn" ng-click='go()' style="position:relative; left:550px ;" >Add Item</button>
     <button class="btn" ng-click='share()' style="position:relative; left:550px ;" >Share List</button>
     <div class="panel-body">
@@ -9,11 +10,16 @@
                     <a href="{{wish.url}}"><img src="{{wish.thumbnail}}" style="max-height:100%;max-width:100%"></a>
                 </div>
                 <div class="col-lg-6" >
-                    <span style="position: relative; left: 250px; top:-265px;"><a href="{{wish.url}}"><strong>Titile : {{wish.title}}</strong></a></span>
+                    <span style="position: relative; left: 250px; top:-265px;"><a href="{{wish.url}}"><strong>Title : {{wish.title}}</strong></a></span>
                     <br>
                     <span style="position: relative; left: 250px; top:-250px;">Description : {{wish.description}}</span>
                     <br>
-                    <button class="btn" ng-click='remove($index)' style="position: relative; left: 250px; top:-235px;" >Remove</button>
+                    <span style="position: relative; left: 250px; top:-235px;">Priority : {{wish.priority}}</span>
+                    <br>
+                    <span style="position: relative; left: 250px; top:-220px;">Status : {{wish.status}}</span>
+                    <br>
+                    <button class="btn" ng-click='remove($index)' style="position: relative; left: 250px; top:-205px;" >Remove</button>
+                    <button class="btn" ng-click='purchased($index)' style="position: relative; left: 270px; top:-205px;" >Purchased</button>
                     <br>
                 </div>
                 
